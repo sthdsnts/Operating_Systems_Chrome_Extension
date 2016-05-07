@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+
+  "name": "Quickly",
+  "description": "This extension allows individuals to clear page history at the click of a button (or hot-key) and (or) close the browser",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}
