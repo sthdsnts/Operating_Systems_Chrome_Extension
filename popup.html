@@ -12,7 +12,7 @@
         font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
         font-size: 100%;
         width: 150px;
-        height: 300px;
+        height: 150px;
       }
       #status {
         /* avoid an excessively wide status text */
@@ -40,7 +40,8 @@
       
       .menu {
           font-size: 16px;
-          color:red;
+          color:#FFFFFF;
+          background-color:#FF5252;
       }
       
     </style>
@@ -54,11 +55,14 @@
     <div class="menu" >
       <input type="checkbox" id="closeBrowser" name="closeBrowser"/>
       <label for="closeBrowser"><nobr>Clear All History</nobr></label></div>
-     <br>
      
      <div class="menu" >
      <input type="checkbox" id="useHotkey" name="useHotkey"/>
      <label for="useHotkey"><nobr>Use Hotkey</nobr></label></div>
+     
+      <div class="menu" >
+     <input type="checkbox" id="closeTab" name="closeTab"/>
+     <label for="closeTab"><nobr>Close Tab</nobr></label></div>
   </body>
 </html>
 

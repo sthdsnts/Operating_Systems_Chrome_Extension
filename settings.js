@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
       document.querySelector('#closeBrowser').addEventListener('change', CheckClosedSetting);
 });
-
-
-
+document.addEventListener('DOMContentLoaded', function () {
+      document.querySelector('#closeTab').addEventListener('change', CheckCloseTab);
+});
 document.addEventListener('DOMContentLoaded', function () {
       document.querySelector('#useHotkey').addEventListener('change', CheckUseHotkey);
 });
@@ -26,4 +26,12 @@ function CheckUseHotkey(){
    }
 }
 
+function CheckCloseTab(){
+   if(closeTab.checked){
+    console.log("I am checked [Close Tab]");
+   }
+   else{
+      //do something else
+   }
+}
  
