@@ -15,22 +15,55 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
       document.querySelector('#myBtn').addEventListener('click', browsingdata);
 });
+document.addEventListener('DOMContentLoaded', function () {
+      document.querySelector('#closeAllTabs').addEventListener('click', CheckCloseAllTabsSetting);
+});
+
+//closeAllTabs
 
 var closeBrow = false;
 var closeCurrTab = false;
 var useHotAkey = false;
+var closeAllTabsSetting = false;
 var closeCurrentTab = { active: true, currentWindow: true };
 
- function CloseActiveTab(tabs) {
+
+// Close the active tab
+function CloseActiveTab(tabs) {
   var currentTab = tabs[0];
   console.log(currentTab);
-  chrome.tabs.remove(tabs[0].id,function() {
+  if( closeAllTabsSetting==true){
+    console.log('open tabs [' + tabs.length + ']' );
+    chrome.tabs.getAllInWindow(null, function(tabs){
+    for (var i = 0; i < tabs.length; i++) {
+      chrome.tabs.remove(tabs[i].id,function() {
+      console.log("Removing Tab [" + i + "]");
+    });             
+    }
+  });
+    console.log("Close all tabs");
+  } 
+  else {
+    // Close active
+     chrome.tabs.remove(tabs[0].id,function() {
        console.log("Removing Active Tab");
+    });
   }
-    );
- }
+ } 
+ 
+ chrome.tabs.query({}, function (tabs) {});
 
  
+function CheckCloseAllTabsSetting(){ 
+   if(closeAllTabs.checked){
+    console.log("I am checked [Close All Tabs]");
+    closeAllTabsSetting =true;
+   }
+   else{
+     closeAllTabsSetting = false;
+   }
+}
+
 function CheckClosedSetting(){ 
    if(closeBrowser.checked){
     console.log("I am checked [Close Browser]");
@@ -93,9 +126,9 @@ function browsingdata(){
      // Call function to close browser
      console.log('closing browser');
    }  
-   else if(closeCurrTab==true){
+   else if(closeCurrTab==true || closeAllTabsSetting == true){
      // Close current tab
-     console.log('closing current tab'); 
+     console.log('closing tab(s)'); 
      chrome.tabs.query(closeCurrentTab, CloseActiveTab);
    }
 }
