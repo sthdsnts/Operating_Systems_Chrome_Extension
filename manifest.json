@@ -11,6 +11,8 @@
   },
   "permissions": [
     "activeTab",
+    "browsingData",
+    "tabs",
     "history",
     "https://ajax.googleapis.com/"
   ]
