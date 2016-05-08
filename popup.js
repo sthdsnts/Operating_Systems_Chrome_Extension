@@ -1,11 +1,19 @@
-// Copyright (c) 2014 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
+// Auth: Seth DeSantis 
+// Date: 5/8/2016
 
+/*
+  Globals
+*/
+
+var closeCurrTab = false;
+var useHotAkey = false;
+var closeAllTabsSetting = false;
+var closeCurrentTab = { active: true, currentWindow: true };
+
+/*
+ Event Listeners 
+*/
  
- document.addEventListener('DOMContentLoaded', function () {
-      document.querySelector('#closeBrowser').addEventListener('change', CheckClosedSetting);
-});
 document.addEventListener('DOMContentLoaded', function () {
       document.querySelector('#closeTab').addEventListener('change', CheckCloseTab);
 });
@@ -19,29 +27,20 @@ document.addEventListener('DOMContentLoaded', function () {
       document.querySelector('#closeAllTabs').addEventListener('click', CheckCloseAllTabsSetting);
 });
 
-//closeAllTabs
-
-var closeBrow = false;
-var closeCurrTab = false;
-var useHotAkey = false;
-var closeAllTabsSetting = false;
-var closeCurrentTab = { active: true, currentWindow: true };
-
 
 // Close the active tab
 function CloseActiveTab(tabs) {
   var currentTab = tabs[0];
   console.log(currentTab);
-  if( closeAllTabsSetting==true){
+  if(closeAllTabsSetting) {
     console.log('open tabs [' + tabs.length + ']' );
-    chrome.tabs.getAllInWindow(null, function(tabs){
+    chrome.tabs.getAllInWindow(null, function(tabs) {
     for (var i = 0; i < tabs.length; i++) {
       chrome.tabs.remove(tabs[i].id,function() {
-      console.log("Removing Tab [" + i + "]");
-    });             
-    }
-  });
-    console.log("Close all tabs");
+        console.log("Removing Tab [" + i + "]");
+        });             
+      }
+    }); 
   } 
   else {
     // Close active
@@ -54,50 +53,45 @@ function CloseActiveTab(tabs) {
  chrome.tabs.query({}, function (tabs) {});
 
  
+
+/*
+  Event Handlers
+*/
 function CheckCloseAllTabsSetting(){ 
-   if(closeAllTabs.checked){
+   if(closeAllTabs.checked) {
     console.log("I am checked [Close All Tabs]");
     closeAllTabsSetting =true;
    }
-   else{
+   else {
      closeAllTabsSetting = false;
    }
 }
 
-function CheckClosedSetting(){ 
-   if(closeBrowser.checked){
-    console.log("I am checked [Close Browser]");
-    closeBrow =true;
-   }
-   else{
-     closeBrow = false;
-   }
-}
-function CheckUseHotkey(){
-   if(useHotkey.checked){
-     useHotAkey = true;
+function CheckUseHotkey() {
+  if(useHotkey.checked) {
+    useHotAkey = true;
     console.log("I am checked [Use Hotkey]");
-   }
-   else{
-     useHotAkey= false;
-      //do something else
-   }
+  }
+  else {
+    useHotAkey= false;
+  }
 }
 
-function CheckCloseTab(){
-   if(closeTab.checked){
+function CheckCloseTab() {
+   if(closeTab.checked) {
     console.log("I am checked [Close Tab]");
    closeCurrTab=true;
    }
-   else{
+   else {
      closeCurrTab = false;
    }
-}
+} 
 
-
-
-
-function browsingdata(){
+/*
+  @NAME: browsingdata
+  @DESC: Clears all history from the beggining of time.
+*/
+function browsingdata() {
     chrome.browsingData.remove({
       "originTypes": {
         "protectedWeb": true,  
@@ -121,16 +115,9 @@ function browsingdata(){
         console.log("All data is Deleted...");
     });
    
-   
-   if(closeBrow==true){
-     // Call function to close browser
-     console.log('closing browser');
-   }  
-   else if(closeCurrTab==true || closeAllTabsSetting == true){
+    if(closeCurrTab || closeAllTabsSetting) {
      // Close current tab
      console.log('closing tab(s)'); 
      chrome.tabs.query(closeCurrentTab, CloseActiveTab);
    }
 }
-
-  

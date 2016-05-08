@@ -1,9 +1,4 @@
 <!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
   <head>
     <title>Quickly</title>
@@ -86,16 +81,12 @@
 
     </style>
     <script src="popup.js"></script>
-  
   </head>
   <body>
     <div id="header-bar"></div> 
     <div id ="logo"><center>Quickly.</center></div> 
       <div id="header-bar"></div> 
-    <div class="menu" >
-      <input type="checkbox" id="closeBrowser" name="closeBrowser"/>
-      <label for="closeBrowser"><nobr>Close Browser</nobr></label></div>
-     
+  
      <div class="menu" >
      <input type="checkbox" id="useHotkey" name="useHotkey"/>
      <label for="useHotkey"><nobr>Use Hotkey</nobr></label></div>
