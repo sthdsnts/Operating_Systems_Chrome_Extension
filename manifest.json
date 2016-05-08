@@ -11,6 +11,7 @@
   },
   "permissions": [
     "activeTab",
+    "history",
     "https://ajax.googleapis.com/"
   ]
 }
