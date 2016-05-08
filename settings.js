@@ -17,7 +17,6 @@ function CheckClosedSetting(){
       //do something else
    }
 }
-
 function CheckUseHotkey(){
    if(useHotkey.checked){
     console.log("I am checked [Use Hotkey]");

@@ -46,7 +46,6 @@ function getCurrentTabUrl(callback) {
   // });
   // alert(url); // Shows "undefined", because chrome.tabs.query is async.
 }
- 
 
 function renderStatus(statusText) {
   document.getElementById('status').textContent = statusText;
